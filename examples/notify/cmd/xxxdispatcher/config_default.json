@@ -3,6 +3,7 @@
     "channels": {
       "accessed": "#general"
     },
+    "debug": true,
     "token": "xoxp-xxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   }
 }

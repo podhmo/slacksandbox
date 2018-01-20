@@ -7,16 +7,18 @@ import (
 	"os"
 
 	"github.com/pkg/errors"
+	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/actions"
 	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher"
 	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher/slack"
+	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/root"
 )
 
 type config struct {
-	Slack slack.Config `json:"slack"`
+	Slack slack.Config `json:"slack"` // todo: dispatcher.SlackConfig (type alias)
 }
 
 type app struct {
-	Dispatcher dispatcher.Dispatcher
+	Registry *root.Registry
 }
 
 func makeApp(confpath string) (*app, error) {
@@ -32,7 +34,10 @@ func makeApp(confpath string) (*app, error) {
 	}
 
 	return &app{
-		Dispatcher: dispatcher.New(c.Slack),
+		Registry: root.NewRegistry(
+			root.WithDispatcher(dispatcher.New(c.Slack)),
+			root.WithOutput(os.Stderr),
+		),
 	}, nil
 }
 
@@ -43,8 +48,10 @@ func run(confpath string) error {
 	}
 
 	ctx := context.Background()
-	app.Dispatcher.DispatchAccessed(ctx)
-
+	skipped := false
+	if err := actions.Accessed(ctx, app.Registry, skipped); err != nil {
+		return err
+	}
 	return nil
 }
 

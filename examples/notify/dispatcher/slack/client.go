@@ -7,8 +7,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-// todo: debug option
-
 // Client :
 type Client interface {
 	postMessageClient

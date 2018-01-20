@@ -11,7 +11,7 @@ type Notifier struct {
 // New :
 func New(c Config) *Notifier {
 	return &Notifier{
-		Client:   &actualClient{token: c.Token},
+		Client:   &actualClient{token: c.Token, Debug: c.Debug},
 		Channels: c.Channels,
 	}
 }
