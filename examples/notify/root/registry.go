@@ -14,7 +14,15 @@ type Registry struct {
 }
 
 // NewRegistry :
-func NewRegistry(options ...func(*Registry)) *Registry {
+func NewRegistry(d dispatcher.Dispatcher) *Registry {
+	return &Registry{
+		Dispatcher: d,
+		Output:     os.Stderr,
+	}
+}
+
+// NewRegistryWithOptions :
+func NewRegistryWithOptions(options ...func(*Registry)) *Registry {
 	r := &Registry{}
 	for _, op := range options {
 		op(r)

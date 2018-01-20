@@ -16,5 +16,5 @@ func NewRegistry(options ...func(*root.Registry)) *root.Registry {
 			r.Dispatcher = NewDispatcher()
 		}
 	})
-	return root.NewRegistry(options...)
+	return root.NewRegistryWithOptions(options...)
 }

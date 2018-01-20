@@ -34,10 +34,7 @@ func makeApp(confpath string) (*app, error) {
 	}
 
 	return &app{
-		Registry: root.NewRegistry(
-			root.WithDispatcher(dispatcher.New(c.Slack)),
-			root.WithOutput(os.Stderr),
-		),
+		Registry: root.NewRegistry(dispatcher.New(c.Slack)),
 	}, nil
 }
 
