@@ -11,6 +11,12 @@ import (
 
 // Client :
 type Client interface {
+	postMessageClient
+	Hello() string
+}
+
+// postMessageClient
+type postMessageClient interface {
 	PostMessage(ctx context.Context, channel, message string) error
 }
 
@@ -18,6 +24,11 @@ type Client interface {
 type actualClient struct {
 	token string
 	Debug bool
+}
+
+// Hello : xxx
+func (c *actualClient) Hello() string {
+	return "hello"
 }
 
 func (c *actualClient) PostMessage(ctx context.Context, channel, message string) error {

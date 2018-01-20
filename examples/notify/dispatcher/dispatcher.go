@@ -6,8 +6,6 @@ import (
 	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher/slack"
 )
 
-//go:generate mockery -name Dispatcher
-
 // Dispatcher :
 type Dispatcher interface {
 	DispatchAccessed(context.Context)

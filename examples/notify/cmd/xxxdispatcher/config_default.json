@@ -1,7 +1,7 @@
 {
   "slack": {
     "channels": {
-      "accessed": "#api-sandbox"
+      "accessed": "#general"
     },
     "token": "xoxp-xxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   }
