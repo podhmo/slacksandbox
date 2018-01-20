@@ -3,8 +3,10 @@ package dispatcher
 import (
 	"context"
 
-	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher/slack"
+	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher/slacknotifier"
 )
+
+type SlackConfig = slacknotifier.Config
 
 // Dispatcher :
 type Dispatcher interface {
@@ -12,13 +14,13 @@ type Dispatcher interface {
 }
 
 type actualDispatcher struct {
-	SlackNotifier *slack.Notifier
+	SlackNotifier *slacknotifier.Notifier
 }
 
 // New :
-func New(slackConfig slack.Config) Dispatcher {
+func New(slackConfig SlackConfig) Dispatcher {
 	return &actualDispatcher{
-		SlackNotifier: slack.New(slackConfig),
+		SlackNotifier: slacknotifier.New(slackConfig),
 	}
 }
 

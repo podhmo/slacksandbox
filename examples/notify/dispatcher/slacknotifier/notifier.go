@@ -1,17 +1,21 @@
-package slack
+package slacknotifier
 
-import "context"
+import (
+	"context"
+
+	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/infra/slack"
+)
 
 // Notifier :
 type Notifier struct {
-	Client   Client
+	Client   slack.Client
 	Channels ChannelsConfig
 }
 
 // New :
 func New(c Config) *Notifier {
 	return &Notifier{
-		Client:   &actualClient{token: c.Token, Debug: c.Debug},
+		Client:   slack.New(c.Config),
 		Channels: c.Channels,
 	}
 }

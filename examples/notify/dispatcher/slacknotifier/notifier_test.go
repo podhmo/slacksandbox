@@ -1,9 +1,10 @@
-package slack
+package slacknotifier
 
 import (
 	"context"
 	"testing"
 
+	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/infra/slack"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -13,8 +14,8 @@ type dummyPostMessageEvent struct {
 }
 
 type dummyPostMessageClient struct {
-	Box           []dummyPostMessageEvent
-	*actualClient // xxx: hack
+	Box []dummyPostMessageEvent
+	*slack.ActualClient
 }
 
 func (cl *dummyPostMessageClient) PostMessage(ctx context.Context, channel, message string) error {
@@ -23,7 +24,7 @@ func (cl *dummyPostMessageClient) PostMessage(ctx context.Context, channel, mess
 }
 
 func TestNotifyMessage(t *testing.T) {
-	makeTarget := func(client Client) *Notifier {
+	makeTarget := func(client slack.Client) *Notifier {
 		return &Notifier{
 			Channels: ChannelsConfig{
 				Accessed: "#accessed",

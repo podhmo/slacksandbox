@@ -1,10 +1,13 @@
-package slack
+package slacknotifier
+
+import (
+	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/infra/slack"
+)
 
 // Config :
 type Config struct {
-	Token    string         `json:"token"`
 	Channels ChannelsConfig `json:"channels"`
-	Debug    bool           `json:"debug"`
+	slack.Config
 }
 
 // ChannelsConfig :

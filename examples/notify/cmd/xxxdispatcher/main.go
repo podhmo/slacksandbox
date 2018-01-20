@@ -9,12 +9,11 @@ import (
 	"github.com/pkg/errors"
 	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/actions"
 	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher"
-	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/dispatcher/slack"
 	"github.com/podhmo/slacksandbox/slacksandbox/examples/notify/root"
 )
 
 type config struct {
-	Slack slack.Config `json:"slack"` // todo: dispatcher.SlackConfig (type alias)
+	Slack dispatcher.SlackConfig `json:"slack"`
 }
 
 type app struct {
