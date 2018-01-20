@@ -26,4 +26,6 @@ func Accessed(ctx context.Context, dispatcher dispatcher.Dispatcher, skipped boo
 }
 ```
 
-For example, the media of notifiation is not slack, if you are writing code using slack client code directly, all dependents code(such like Accessed()), rewriting (or code modification) is needed.
+For example, the situation is changed in future, the media of notifiation will be not slack. If you are writing code using slack client code directly, then, all dependents code(such like Accessed()), rewriting (or code modification) is needed.
+
+But, if using dispatcher, the work like this is not existed.
