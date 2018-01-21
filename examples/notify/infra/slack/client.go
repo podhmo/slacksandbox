@@ -9,33 +9,27 @@ import (
 
 // Client :
 type Client interface {
-	postMessage
+	PostMessage(ctx context.Context, channel, message string) error
 	Hello() string
 }
 
 // New :
 func New(c Config) Client {
-	return &ActualClient{token: c.Token, Debug: c.Debug}
+	return &actualClient{token: c.Token, Debug: c.Debug}
 }
 
-// postMessage :
-type postMessage interface {
-	PostMessage(ctx context.Context, channel, message string) error
-}
-
-// ActualClient :
-type ActualClient struct {
+type actualClient struct {
 	token string
 	Debug bool
 }
 
 // Hello : xxx
-func (c *ActualClient) Hello() string {
+func (c *actualClient) Hello() string {
 	return "hello"
 }
 
 // PostMessage :
-func (c *ActualClient) PostMessage(ctx context.Context, channel, message string) error {
+func (c *actualClient) PostMessage(ctx context.Context, channel, message string) error {
 	// todo: reuse
 	cl := goslack.New(c.token, goslack.WithDebug(c.Debug))
 	_, err := cl.Auth().Test().Do(ctx)
