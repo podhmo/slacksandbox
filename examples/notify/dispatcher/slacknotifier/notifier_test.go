@@ -35,6 +35,6 @@ func TestNotifyMessage(t *testing.T) {
 
 		assert.Len(t, box, 1)
 		assert.Exactly(t, "#accessed", box[0].channel)
-		assert.Exactly(t, "accessed (o_0)", box[0].message)
+		assert.Contains(t, box[0].message, "accessed (o_0)")
 	})
 }
