@@ -1,5 +1,6 @@
 gen:
 	(cd dispatcher; go generate)
+	go-bindata -o assets/bindata.go -pkg assets templates/...
 
 setup-gen:
 	go get -v github.com/vektra/mockery/...
