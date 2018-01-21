@@ -31,20 +31,17 @@ func (n *Notifier) NotifyWhenAccessed(ctx context.Context) {
 	data := map[string]interface{}{
 		"now": time.Now(),
 	}
-	accessedTemplate.Execute(&b, data)
+	tmplAccessed.Execute(&b, data)
 	n.Client.PostMessage(ctx, n.Channels.Accessed, b.String())
 }
 
 func mustParse(assetName string, name string) *template.Template {
-	b, err := assets.Asset(assetName)
-	if err != nil {
-		panic(err)
-	}
+	b := assets.MustAsset(assetName)
 	return template.Must(template.New(name).Parse(string(b))) // using unsafe cast?
 }
 
-var accessedTemplate *template.Template
+var tmplAccessed *template.Template
 
 func init() {
-	accessedTemplate = mustParse("templates/slack/accessed.tmpl", "accessed")
+	tmplAccessed = mustParse("templates/slack/accessed.tmpl", "accessed")
 }
